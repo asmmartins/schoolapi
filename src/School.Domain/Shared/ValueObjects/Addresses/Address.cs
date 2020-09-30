@@ -20,5 +20,7 @@ namespace School.Domain.Shared.ValueObjects.Addresses
             yield return City;
             yield return State;
         }
+
+        protected Address() { }
     }
 }
