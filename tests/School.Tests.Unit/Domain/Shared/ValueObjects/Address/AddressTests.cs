@@ -1,6 +1,6 @@
 ﻿using FluentAssertions;
 using FluentValidation;
-using System.Linq;
+using School.Tests.Unit.Shared;
 using Xunit;
 using VO = School.Domain.Shared.ValueObjects;
 
@@ -16,12 +16,46 @@ namespace School.Tests.Unit.Domain.Shared.ValueObjects.Address
         public void Shouldnot_CreateAddress_WithZipCodeInvalid(string zipCode, string errorMessage)
         {
             ValidationException ex = Assert.Throws<ValidationException>(() => VO.Addresses.Address.Create(zipCode, "", "", "", "", VO.Addresses.State.SP));
-
-            // Asserts
-            ex.Should().NotBeNull();
-            ex.Errors.Should().NotBeNullOrEmpty();
-            ex.Errors.FirstOrDefault().ErrorMessage.Should().Be(errorMessage);
+            ex.AssertErrorMessage(errorMessage);
         }
+
+        [Theory]
+        [InlineData(null, "'Base Address' não pode ser nulo.")]
+        [InlineData("", "'Base Address' deve ser informado.")]
+        [InlineData("Calculate the length of your string of text or numbers to check the number of characters it contains! Using our online character counting tool is quick", "'Base Address' deve ser menor ou igual a 150 caracteres. Você digitou 151 caracteres.")]
+        public void Shouldnot_CreateAddress_WithBaseAddressInvalid(string baseAddress, string errorMessage)
+        {
+            ValidationException ex = Assert.Throws<ValidationException>(() => VO.Addresses.Address.Create("20230011", baseAddress, "", "", "", VO.Addresses.State.AM));
+            ex.AssertErrorMessage(errorMessage);
+        }
+
+        [Theory]
+        [InlineData("Calculate the length of your string of text or number", "'Complement Address' deve ser menor ou igual a 50 caracteres. Você digitou 53 caracteres.")]        
+        public void Shouldnot_CreateAddress_WithComplementAddressInvalid(string complementAddress, string errorMessage)
+        {
+            ValidationException ex = Assert.Throws<ValidationException>(() => VO.Addresses.Address.Create("20230011", "Rua Riachuelo, 221", complementAddress, "", "", VO.Addresses.State.CE));
+            ex.AssertErrorMessage(errorMessage);
+        }
+
+        [Theory]
+        [InlineData(null, "'Neighborhood' não pode ser nulo.")]
+        [InlineData("", "'Neighborhood' deve ser informado.")]
+        [InlineData("Calculate the length of your string of text or numb", "'Neighborhood' deve ser menor ou igual a 50 caracteres. Você digitou 51 caracteres.")]
+        public void Shouldnot_CreateAddress_WithNeighborhoodInvalid(string neighborhood, string errorMessage)
+        {
+            ValidationException ex = Assert.Throws<ValidationException>(() => VO.Addresses.Address.Create("20230011", "Ria Riachuelo, 221", "Apt 915", neighborhood, "", VO.Addresses.State.RS));
+            ex.AssertErrorMessage(errorMessage);
+        }        
+
+        [Theory]
+        [InlineData(null, "'City' não pode ser nulo.")]
+        [InlineData("", "'City' deve ser informado.")]
+        [InlineData("Calculate the length of your string of text or numb", "'City' deve ser menor ou igual a 50 caracteres. Você digitou 51 caracteres.")]
+        public void Shouldnot_CreateAddress_WithCityInvalid(string city, string errorMessage)
+        {
+            ValidationException ex = Assert.Throws<ValidationException>(() => VO.Addresses.Address.Create("20230011", "Ria Riachuelo, 221", "Apt 915", "Centro", city, VO.Addresses.State.SP));
+            ex.AssertErrorMessage(errorMessage);
+        }    
 
         [Theory]
         [InlineData("20230011", "Rua Riachuelo, 221", "Apt 915", "Centro", "Rio de Janeiro", VO.Addresses.State.RJ)]
@@ -37,6 +71,6 @@ namespace School.Tests.Unit.Domain.Shared.ValueObjects.Address
             address.Neighborhood.Should().Be(neighborhood);
             address.City.Should().Be(city);
             address.State.Should().Be(state);
-        }
+        }        
     }
 }

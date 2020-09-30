@@ -54,6 +54,7 @@ namespace School.Domain.Shared.ValueObjects.Addresses
         private void AddStateRules()
         {
             RuleFor(address => address.State).NotNull();
+            RuleFor(address => address.State).NotEmpty();
             RuleFor(address => address.State).IsInEnum();
         }
     }
