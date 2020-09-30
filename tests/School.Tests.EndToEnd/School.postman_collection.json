@@ -1,0 +1,326 @@
+{
+	"info": {
+		"_postman_id": "e3bc6004-9c83-4323-a360-baf5c649d298",
+		"name": "Sensores",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Capturar Sensor 01",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "7f0d6acc-83fa-43d6-b77f-0d02a398e77c",
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {\r",
+							"    pm.response.to.have.status(204);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json-patch+json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"timestamp\":1539112021301,\"tag\":\"brasil.sudeste.sensor01\",\"value\":\"123456\"}"
+				},
+				"url": {
+					"raw": "https://localhost:5001/sensores",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"sensores"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Capturar Sensor 02",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4407b12b-99d0-489a-b633-831395b820e5",
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {\r",
+							"    pm.response.to.have.status(204);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json-patch+json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"timestamp\":1598443127,\"tag\":\"brasil.nordeste.sensor02\",\"value\":\"963258\"}"
+				},
+				"url": {
+					"raw": "https://localhost:5001/sensores",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"sensores"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Capturar Sensor 03",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ac918ad4-53ce-4adc-b469-062ec8a8968f",
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {\r",
+							"    pm.response.to.have.status(204);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json-patch+json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"timestamp\":1598443223,\"tag\":\"brasil.norte.sensor03\",\"value\":\"852147\"}"
+				},
+				"url": {
+					"raw": "https://localhost:5001/sensores",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"sensores"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Capturar Sensor 04",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4c05254e-36b6-4ffb-a75d-e71e75ee3107",
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {\r",
+							"    pm.response.to.have.status(204);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json-patch+json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"timestamp\":1598443354,\"tag\":\"brasil.centrooeste.sensor04\",\"value\":\"147852\"}"
+				},
+				"url": {
+					"raw": "https://localhost:5001/sensores",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"sensores"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Capturar Sensor 05",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5dba5a13-6145-4b6a-a00e-b9f1648aaf6a",
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {\r",
+							"    pm.response.to.have.status(204);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json-patch+json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"timestamp\":1598443458,\"tag\":\"brasil.sul.sensor05\",\"value\":\"159357\"}"
+				},
+				"url": {
+					"raw": "https://localhost:5001/sensores",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"sensores"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obter Sensores",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "61d995ee-5680-408b-b5c4-595e4ce1be0c",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response is Valid\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.be.an('array').that.is.not.empty;    \r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "https://localhost:5001/sensores",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"sensores"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obter Sensores Regionais",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a6e5f6db-30ce-4e55-8fba-8fcb2b634e32",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response is Valid\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.be.an('array').that.is.not.empty;    \r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "https://localhost:5001/sensores-regionais",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"sensores-regionais"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
