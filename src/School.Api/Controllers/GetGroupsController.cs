@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using School.Application.UseCases.GetGroups;
 using School.Application.UseCases.Shared.Dtos;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace School.Api.Controllers
@@ -33,7 +34,7 @@ namespace School.Api.Controllers
         {
             var response = await _getGroupsUseCase.Execute(inep);
 
-            if (response == null) return NotFound();
+            if (!(response != null && response.Any())) return NotFound();
 
             return Ok(response);
         }
