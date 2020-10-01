@@ -24,7 +24,7 @@ namespace School.UseCases.CreateGroup
 
         public async Task Execute(CreateGroupRequest createGroupRequest)
         {
-            Validate(createGroupRequest);            
+            Validate(createGroupRequest);
 
             var publicSchool = await GetPublicSchoolByInep(createGroupRequest.Inep);
 
@@ -59,7 +59,7 @@ namespace School.UseCases.CreateGroup
         private async Task<Group> GetGroupByName(string name)
         {
             var groups = await _groupRepository.GetAll();
-            return groups?.FirstOrDefault(group => group.Name == name?.Trim()) ;
+            return groups?.FirstOrDefault(group => group.Name == name?.Trim());
         }
     }
 }

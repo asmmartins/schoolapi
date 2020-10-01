@@ -22,7 +22,7 @@ namespace School.Domain.Groups
         }
 
         public Group Update(PublicSchool publicSchool)
-        {            
+        {
             PublicSchool = publicSchool;
 
             Validate(this);
