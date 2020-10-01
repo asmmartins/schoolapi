@@ -2,6 +2,7 @@
 using FluentValidation;
 using School.Application.UseCases.CreateGroup;
 using School.Application.UseCases.CreatePublicSchool;
+using School.Application.UseCases.GetGroup;
 using School.Application.UseCases.GetGroups;
 using School.Application.UseCases.Shared.Dtos;
 using School.Tests.Integration.Shared;
@@ -16,15 +17,18 @@ namespace School.Tests.Integration.UseCases
         private readonly ICreatePublicSchoolUseCase _createPublicSchoolUseCase;
         private readonly ICreateGroupUseCase _createGroupUseCase;
         private readonly IGetGroupsUseCase _getGroupsUseCase;
+        private readonly IGetGroupUseCase _getGroupUseCaso;
 
         public CreateGroupUseCaseTests(
             ICreatePublicSchoolUseCase createPublicSchoolUseCase,
             ICreateGroupUseCase createGroupUseCase,
-            IGetGroupsUseCase getGroupsUseCase)
+            IGetGroupsUseCase getGroupsUseCase,
+            IGetGroupUseCase getGroupUseCaso)
         {
             _createPublicSchoolUseCase = createPublicSchoolUseCase;
             _createGroupUseCase = createGroupUseCase;
             _getGroupsUseCase = getGroupsUseCase;
+            _getGroupUseCaso = getGroupUseCaso;
         }
 
         [Theory]
@@ -59,6 +63,13 @@ namespace School.Tests.Integration.UseCases
             var groups = await _getGroupsUseCase.Execute(inep);
             groups.Should().NotBeNull();
             groups.Should().OnlyHaveUniqueItems();
+
+            foreach (var g in groups)
+            {
+                var existentGroup = await _getGroupUseCaso.Execute(g.Id);
+                existentGroup.Should().NotBeNull();
+                existentGroup.Should().BeEquivalentTo(g);
+            }
         }
 
         [Fact]       

@@ -1,20 +1,20 @@
 ﻿using AutoMapper;
-using School.Application.UseCases.GetGroups;
+using School.Application.UseCases.GetGroup;
 using School.Application.UseCases.Shared.Dtos;
 using School.Domain.Groups;
 using School.Domain.Shared;
-using System.Collections.Generic;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace School.UseCases.GetGroups
+namespace School.UseCases.GetGroup
 {
-    public class GetGroupsUseCase : IGetGroupsUseCase
+    public class GetGroupUseCase : IGetGroupUseCase
     {
         private readonly IMapper _mapper;
         private readonly IRepository<Group> _groupRepository;
 
-        public GetGroupsUseCase(
+        public GetGroupUseCase(
             IMapper mapper,
             IRepository<Group> GroupRepository)
         {
@@ -22,16 +22,16 @@ namespace School.UseCases.GetGroups
             _groupRepository = GroupRepository;
         }                
 
-        public async Task<IEnumerable<GroupDto>> Execute(string inep)
+        public async Task<GroupDto> Execute(Guid id)
         {
-            var groups = await GetGroupByInep(inep);
-            return _mapper.Map<IEnumerable<GroupDto>>(groups);                        
+            var group = await GetGroupById(id);
+            return _mapper.Map<GroupDto>(group);                        
         }
 
-        private async Task<IEnumerable<Group>> GetGroupByInep(string inep)
+        private async Task<Group> GetGroupById(Guid id)
         {
             var groups = await _groupRepository.GetAll();            
-            return groups?.Where(ps => ps.PublicSchool.Inep == inep?.Trim());
+            return groups?.FirstOrDefault(ps => ps.Id == id);
         }
     }
 }
