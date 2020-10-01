@@ -1,0 +1,236 @@
+{
+	"info": {
+		"_postman_id": "c12e9661-4763-460e-8ece-8a1b973cf4c5",
+		"name": "SchoolApi",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create Public School",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "04aa7775-5683-451c-8bbd-765182d14ad1",
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {\r",
+							"    pm.response.to.have.status(204);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json-patch+json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"inep\":\"14523698\",\"name\":\"Escola Amor Maior\",\"address\":{\"zipCode\":\"20230011\",\"baseAddress\":\"Rua da Alegria\",\"complementAddress\":\"Numero 15\",\"neighborhood\":\"Centro\",\"city\":\"Rio de Janeiro\",\"state\":\"RJ\"}}",
+					"options": {
+						"raw": {}
+					}
+				},
+				"url": {
+					"raw": "https://amschoolapi.azurewebsites.net/public-schools",
+					"protocol": "https",
+					"host": [
+						"amschoolapi",
+						"azurewebsites",
+						"net"
+					],
+					"path": [
+						"public-schools"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Public School",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e503f621-be40-4806-9e9b-9573a04ee052",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://amschoolapi.azurewebsites.net/public-schools/14523698",
+					"protocol": "https",
+					"host": [
+						"amschoolapi",
+						"azurewebsites",
+						"net"
+					],
+					"path": [
+						"public-schools",
+						"14523698"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Groups",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "1fbc8617-4940-4452-9291-ba14fadcb9b4",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://amschoolapi.azurewebsites.net/public-schools/14523698/groups",
+					"protocol": "https",
+					"host": [
+						"amschoolapi",
+						"azurewebsites",
+						"net"
+					],
+					"path": [
+						"public-schools",
+						"14523698",
+						"groups"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Groups By Id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "741a82f3-1016-4582-aa8e-403d36ed578a",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://amschoolapi.azurewebsites.net/groups/4f5426c0-96d2-471b-ae82-491c9298c892",
+					"protocol": "https",
+					"host": [
+						"amschoolapi",
+						"azurewebsites",
+						"net"
+					],
+					"path": [
+						"groups",
+						"4f5426c0-96d2-471b-ae82-491c9298c892"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Group Paciência",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json-patch+json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"inep\":\"14523698\",\"name\":\"Turma Paciência\"}"
+				},
+				"url": {
+					"raw": "https://amschoolapi.azurewebsites.net/public-schools/14523698/groups",
+					"protocol": "https",
+					"host": [
+						"amschoolapi",
+						"azurewebsites",
+						"net"
+					],
+					"path": [
+						"public-schools",
+						"14523698",
+						"groups"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Group Verdade",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json-patch+json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"inep\":\"14523698\",\"name\":\"Turma Verdade\"}"
+				},
+				"url": {
+					"raw": "https://amschoolapi.azurewebsites.net/public-schools/14523698/groups",
+					"protocol": "https",
+					"host": [
+						"amschoolapi",
+						"azurewebsites",
+						"net"
+					],
+					"path": [
+						"public-schools",
+						"14523698",
+						"groups"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
