@@ -1,8 +1,10 @@
-﻿using School.Application.UseCases.CreatePublicSchool;
+﻿using FluentValidation;
+using School.Application.UseCases.CreatePublicSchool;
 using School.Domain.PublicSchools;
 using School.Domain.Shared;
 using School.Domain.Shared.ValueObjects.Addresses;
 using System;
+using System.Net.Sockets;
 using System.Threading.Tasks;
 
 namespace School.UseCases.CreatePublicSchool
@@ -28,8 +30,11 @@ namespace School.UseCases.CreatePublicSchool
 
         private static void Validate(CreatePublicSchoolRequest createPublicSchoolRequest)
         {
-            if (createPublicSchoolRequest == null) throw new ArgumentNullException("Escola pública é obrigatória.");
-            if (createPublicSchoolRequest.Address == null) throw new ArgumentNullException("Endereço da escola pública é obrigatória.");
+            if (createPublicSchoolRequest == null) 
+                throw new ArgumentNullException("CreatePublicSchoolRequest");
+
+            var validator = new CreatePublicSchoolRequestValidator();
+            validator.ValidateAndThrow(createPublicSchoolRequest);            
         }
     }
 }

@@ -1,5 +1,8 @@
 ﻿using FluentAssertions;
+using FluentValidation;
 using School.Application.UseCases.CreatePublicSchool;
+using School.Application.UseCases.Shared.Dtos;
+using School.Tests.Integration.Shared;
 using System;
 using System.Threading.Tasks;
 using Xunit;
@@ -41,9 +44,26 @@ namespace School.Tests.Integration.UseCases
         public async Task Shouldnot_CreatePublicSchoolUseCase_WithRequestNull()
         {
             ArgumentNullException ex = await Assert.ThrowsAsync<ArgumentNullException>(() => _createPublicSchoolUseCase.Execute(null));
-
             ex.Should().NotBeNull();
-            ex.Message.Should().Be("Value cannot be null. (Parameter 'Escola pública é obrigatória.')");
+            ex.Message.Should().Be("Value cannot be null. (Parameter 'CreatePublicSchoolRequest')");
+        }
+
+        [Fact]
+        public async Task Shouldnot_CreatePublicSchoolUseCase_WithAddressNull()
+        {
+            var request = new CreatePublicSchoolRequest() { Name = "Escola Nossa Senhora do Loreto" };
+
+            ValidationException ex = await Assert.ThrowsAsync<ValidationException>(() => _createPublicSchoolUseCase.Execute(request));            
+            ex.AssertErrorMessage("'Address' não pode ser nulo.");
+        }
+
+        [Fact]
+        public async Task Shouldnot_CreatePublicSchoolUseCase_WithNameInvalid()
+        {
+            var request = new CreatePublicSchoolRequest() { Name = null, Address = new AddressDto() };
+
+            ValidationException ex = await Assert.ThrowsAsync<ValidationException>(() => _createPublicSchoolUseCase.Execute(request));
+            ex.AssertErrorMessage("'Name' não pode ser nulo.");
         }
     }
 }
