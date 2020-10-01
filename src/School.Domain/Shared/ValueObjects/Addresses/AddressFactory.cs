@@ -8,11 +8,11 @@ namespace School.Domain.Shared.ValueObjects.Addresses
         {
             var address = new Address()
             {
-                ZipCode = zipCode,
-                BaseAddress = baseAddress,
-                ComplementAddress = complementAddress,
-                Neighborhood = neighborhood,
-                City = city,
+                ZipCode = zipCode?.Trim(),
+                BaseAddress = baseAddress?.Trim(),
+                ComplementAddress = complementAddress?.Trim(),
+                Neighborhood = neighborhood?.Trim(),
+                City = city?.Trim(),
                 State = state
             };
 
