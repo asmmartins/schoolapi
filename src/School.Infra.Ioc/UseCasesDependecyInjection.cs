@@ -1,8 +1,10 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using School.Application.UseCases.CapturarEventoSensor;
+using School.Application.UseCases.CreatePublicSchool;
 using School.Application.UseCases.ObterTotalEventosSensor;
 using School.Application.UseCases.ObterTotalEventosSensorPorRegiao;
 using School.UseCases.CapturarEventoSensor;
+using School.UseCases.CreatePublicSchool;
 using School.UseCases.ObterTotalEventosSensor;
 using School.UseCases.ObterTotalEventosSensorPorRegiao;
 
@@ -15,6 +17,7 @@ namespace School.Infra.Ioc
             services.AddTransient<ICapturarEventoSensorUseCase, CapturarEventoSensorUseCase>();
             services.AddTransient<IObterTotalEventosSensorUseCase, ObterTotalEventosSensorUseCase>();
             services.AddTransient<IObterTotalEventosSensorPorRegiaoUseCase, ObterTotalEventosSensorPorRegiaoUseCase>();
+            services.AddTransient<ICreatePublicSchoolUseCase, CreatePublicSchoolUseCase>();
         }
     }
 }

@@ -46,8 +46,6 @@
   
   <ItemGroup>
     <Folder Include="Api\Controllers\" />
-    <Folder Include="Repository\" />
-    <Folder Include="UseCases\" />
   </ItemGroup>
 
 </Project>
