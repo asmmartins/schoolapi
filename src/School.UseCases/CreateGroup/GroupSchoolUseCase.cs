@@ -12,14 +12,14 @@ namespace School.UseCases.CreateGroup
     public class CreateGroupUseCase : ICreateGroupUseCase
     {
         private readonly IRepository<Group> _groupRepository;
-        private readonly IRepository<PublicSchool> _publicRepository;
+        private readonly IRepository<PublicSchool> _publicSchoolRepository;
 
         public CreateGroupUseCase(
             IRepository<Group> groupRepository,
             IRepository<PublicSchool> publicSchoolRepository)
         {
             _groupRepository = groupRepository;
-            _publicRepository = publicSchoolRepository;
+            _publicSchoolRepository = publicSchoolRepository;
         }
 
         public async Task Execute(CreateGroupRequest createGroupRequest)
@@ -43,7 +43,7 @@ namespace School.UseCases.CreateGroup
 
         private async Task<PublicSchool> GetPublicSchoolByInep(string inep)
         {
-            var publicSchools = await _publicRepository.GetAll();
+            var publicSchools = await _publicSchoolRepository.GetAll();
             return publicSchools.FirstOrDefault(ps => ps.Inep == inep?.Trim());
         }
     }

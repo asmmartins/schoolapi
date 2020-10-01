@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using AutoMapper;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using School.Infra.Ioc;
@@ -23,6 +24,7 @@ namespace School.Tests.Integration
 
         protected void ConfigureServices(IServiceCollection services, IConfiguration configuration)
         {
+            services.AddAutoMapper(typeof(AutoMapperProfile));
             services.AddDependecyInjection();
         }
 

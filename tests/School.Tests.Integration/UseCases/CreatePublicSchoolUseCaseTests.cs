@@ -1,6 +1,7 @@
 ﻿using FluentAssertions;
 using FluentValidation;
 using School.Application.UseCases.CreatePublicSchool;
+using School.Application.UseCases.GetPublicSchool;
 using School.Application.UseCases.Shared.Dtos;
 using School.Tests.Integration.Shared;
 using System;
@@ -12,11 +13,14 @@ namespace School.Tests.Integration.UseCases
     public class CreatePublicSchoolUseCaseTests
     {
         private readonly ICreatePublicSchoolUseCase _createPublicSchoolUseCase;
+        private readonly IGetPublicSchoolUseCase _getPublicSchoolUseCase;
 
         public CreatePublicSchoolUseCaseTests(
-            ICreatePublicSchoolUseCase createPublicSchoolUseCase)
+            ICreatePublicSchoolUseCase createPublicSchoolUseCase,
+            IGetPublicSchoolUseCase getPublicSchoolUseCase)
         {
-            _createPublicSchoolUseCase = createPublicSchoolUseCase;            
+            _createPublicSchoolUseCase = createPublicSchoolUseCase;
+            _getPublicSchoolUseCase = getPublicSchoolUseCase;
         }
 
         [Theory]
@@ -27,7 +31,7 @@ namespace School.Tests.Integration.UseCases
             {
                 Inep = inep,
                 Name = name,
-                Address = new Application.UseCases.Shared.Dtos.AddressDto()
+                Address = new AddressDto()
                 {
                     ZipCode = zipCode,
                     BaseAddress = baseAddress,
@@ -39,6 +43,19 @@ namespace School.Tests.Integration.UseCases
             };
 
             await _createPublicSchoolUseCase.Execute(request);
+
+            var publicSchool = await _getPublicSchoolUseCase.Execute(inep);
+
+            publicSchool.Should().NotBeNull();
+            publicSchool.Inep.Should().Be(inep);
+            publicSchool.Name.Should().Be(name);
+            publicSchool.Address.Should().NotBeNull();
+            publicSchool.Address.ZipCode.Should().Be(zipCode);
+            publicSchool.Address.BaseAddress.Should().Be(baseAddress);
+            publicSchool.Address.ComplementAddress.Should().Be(complementAddress);
+            publicSchool.Address.Neighborhood.Should().Be(neighborhood);
+            publicSchool.Address.City.Should().Be(city);
+            publicSchool.Address.State.Should().Be(state);
         }
 
         [Fact]       

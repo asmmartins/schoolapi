@@ -1,3 +1,4 @@
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -26,6 +27,7 @@ namespace School.Api
             });
             services.AddMyControllers();
             services.AddMySwaggerGen();
+            services.AddAutoMapper(typeof(Startup));
             services.AddDependecyInjection();
         }
 
