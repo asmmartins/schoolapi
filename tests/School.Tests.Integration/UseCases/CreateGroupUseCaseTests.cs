@@ -2,6 +2,7 @@
 using FluentValidation;
 using School.Application.UseCases.CreateGroup;
 using School.Application.UseCases.CreatePublicSchool;
+using School.Application.UseCases.GetGroups;
 using School.Application.UseCases.Shared.Dtos;
 using School.Tests.Integration.Shared;
 using System;
@@ -14,13 +15,16 @@ namespace School.Tests.Integration.UseCases
     {
         private readonly ICreatePublicSchoolUseCase _createPublicSchoolUseCase;
         private readonly ICreateGroupUseCase _createGroupUseCase;
+        private readonly IGetGroupsUseCase _getGroupsUseCase;
 
         public CreateGroupUseCaseTests(
             ICreatePublicSchoolUseCase createPublicSchoolUseCase,
-            ICreateGroupUseCase createGroupUseCase)
+            ICreateGroupUseCase createGroupUseCase,
+            IGetGroupsUseCase getGroupsUseCase)
         {
             _createPublicSchoolUseCase = createPublicSchoolUseCase;
             _createGroupUseCase = createGroupUseCase;
+            _getGroupsUseCase = getGroupsUseCase;
         }
 
         [Theory]
@@ -51,6 +55,10 @@ namespace School.Tests.Integration.UseCases
             };
 
             await _createGroupUseCase.Execute(createGroupRequest);
+
+            var groups = await _getGroupsUseCase.Execute(inep);
+            groups.Should().NotBeNull();
+            groups.Should().OnlyHaveUniqueItems();
         }
 
         [Fact]       

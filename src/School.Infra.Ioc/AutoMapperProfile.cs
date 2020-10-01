@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using School.Application.UseCases.GetPublicSchool;
 using School.Application.UseCases.Shared.Dtos;
+using School.Domain.Groups;
 using School.Domain.PublicSchools;
 using School.Domain.Shared.ValueObjects.Addresses;
 
@@ -12,6 +13,7 @@ namespace School.Infra.Ioc
         {
             CreateAddressMap();
             CreatePublicSchoolMap();
+            CreateGroupMap();
         }
 
         private void CreateAddressMap()
@@ -22,6 +24,11 @@ namespace School.Infra.Ioc
         private void CreatePublicSchoolMap()
         {
             CreateMap<PublicSchool, GetPublicSchoolResponse>();
+        }
+
+        private void CreateGroupMap()
+        {
+            CreateMap<Group, GroupDto>();
         }
     }   
 }
