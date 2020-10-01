@@ -7,19 +7,20 @@ namespace School.UseCases.CreateGroup
     {
         public CreateGroupRequestValidator()
         {
-            AddNameRules();
-            AddAddressRules();
+            AddInepRules();
+            AddNameRules();            
+        }
+
+        private void AddInepRules()
+        {
+            RuleFor(request => request.Inep).NotNull();
+            RuleFor(request => request.Inep).NotEmpty();
         }
 
         private void AddNameRules()
         {
             RuleFor(request => request.Name).NotNull();
             RuleFor(request => request.Name).NotEmpty();
-        }
-
-        private void AddAddressRules()
-        {
-            RuleFor(request => request.PublicSchoolId).NotNull();
-        }
+        }        
     }
 }

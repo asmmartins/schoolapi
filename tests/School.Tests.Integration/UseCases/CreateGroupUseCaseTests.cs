@@ -1,5 +1,6 @@
 ﻿using FluentAssertions;
 using FluentValidation;
+using School.Application.UseCases.CreateGroup;
 using School.Application.UseCases.CreatePublicSchool;
 using School.Application.UseCases.Shared.Dtos;
 using School.Tests.Integration.Shared;
@@ -12,22 +13,25 @@ namespace School.Tests.Integration.UseCases
     public class CreateGroupUseCaseTests
     {
         private readonly ICreatePublicSchoolUseCase _createPublicSchoolUseCase;
+        private readonly ICreateGroupUseCase _createGroupUseCase;
 
         public CreateGroupUseCaseTests(
-            ICreatePublicSchoolUseCase createPublicSchoolUseCase)
+            ICreatePublicSchoolUseCase createPublicSchoolUseCase,
+            ICreateGroupUseCase createGroupUseCase)
         {
-            _createPublicSchoolUseCase = createPublicSchoolUseCase;            
+            _createPublicSchoolUseCase = createPublicSchoolUseCase;
+            _createGroupUseCase = createGroupUseCase;
         }
 
         [Theory]
-        [InlineData("59785410", "Escola Municipal Piox", "22763040", "Praça IV, 25", "Apt 915", "Centro", "Rio de Janeiro", Domain.Shared.ValueObjects.Addresses.State.RJ)]
-        public async Task Should_CreatePublicSchoolUseCase(string inep, string name, string zipCode, string baseAddress, string complementAddress, string neighborhood, string city, Domain.Shared.ValueObjects.Addresses.State state)
+        [InlineData("Turma 58", "59785410", "Escola Municipal Piox", "22763040", "Praça IV, 25", "Apt 915", "Centro", "Rio de Janeiro", Domain.Shared.ValueObjects.Addresses.State.RJ)]
+        public async Task Should_CreateGroupUseCase(string name, string inep, string namePublicSchool, string zipCode, string baseAddress, string complementAddress, string neighborhood, string city, Domain.Shared.ValueObjects.Addresses.State state)
         {
-            CreatePublicSchoolRequest request = new CreatePublicSchoolRequest()
+            CreatePublicSchoolRequest createPublicSchoolRequest = new CreatePublicSchoolRequest()
             {
                 Inep = inep,
-                Name = name,
-                Address = new Application.UseCases.Shared.Dtos.AddressDto()
+                Name = namePublicSchool,
+                Address = new AddressDto()
                 {
                     ZipCode = zipCode,
                     BaseAddress = baseAddress,
@@ -38,33 +42,51 @@ namespace School.Tests.Integration.UseCases
                 }
             };
 
-            await _createPublicSchoolUseCase.Execute(request);
+            await _createPublicSchoolUseCase.Execute(createPublicSchoolRequest);
+
+            CreateGroupRequest createGroupRequest = new CreateGroupRequest()
+            {
+                Inep = inep,
+                Name = name
+            };
+
+            await _createGroupUseCase.Execute(createGroupRequest);
         }
 
         [Fact]       
-        public async Task Shouldnot_CreatePublicSchoolUseCase_WithRequestNull()
+        public async Task Shouldnot_CreateGroupUseCase_WithRequestNull()
         {
-            ArgumentNullException ex = await Assert.ThrowsAsync<ArgumentNullException>(() => _createPublicSchoolUseCase.Execute(null));
+            ArgumentNullException ex = await Assert.ThrowsAsync<ArgumentNullException>(() => _createGroupUseCase.Execute(null));
             ex.Should().NotBeNull();
-            ex.Message.Should().Be("Value cannot be null. (Parameter 'CreatePublicSchoolRequest')");
+            ex.Message.Should().Be("Value cannot be null. (Parameter 'CreateGroupRequest')");
         }
 
         [Fact]
-        public async Task Shouldnot_CreatePublicSchoolUseCase_WithAddressNull()
+        public async Task Shouldnot_CreateGroupUseCase_WithInepNull()
         {
-            var request = new CreatePublicSchoolRequest() { Inep = "85963214", Name = "Escola Nossa Senhora do Loreto" };
+            var request = new CreateGroupRequest() { Inep = null, Name = "Escola Nossa Senhora do Loreto" };
 
-            ValidationException ex = await Assert.ThrowsAsync<ValidationException>(() => _createPublicSchoolUseCase.Execute(request));            
-            ex.AssertErrorMessage("'Address' não pode ser nulo.");
+            ValidationException ex = await Assert.ThrowsAsync<ValidationException>(() => _createGroupUseCase.Execute(request));            
+            ex.AssertErrorMessage("'Inep' não pode ser nulo.");
         }
 
         [Fact]
-        public async Task Shouldnot_CreatePublicSchoolUseCase_WithNameInvalid()
+        public async Task Shouldnot_CreateGroupUseCase_WithNameNull()
         {
-            var request = new CreatePublicSchoolRequest() { Inep = "85963214", Name = null, Address = new AddressDto() };
+            var request = new CreateGroupRequest() { Inep = "14523698", Name = null };
 
-            ValidationException ex = await Assert.ThrowsAsync<ValidationException>(() => _createPublicSchoolUseCase.Execute(request));
+            ValidationException ex = await Assert.ThrowsAsync<ValidationException>(() => _createGroupUseCase.Execute(request));
             ex.AssertErrorMessage("'Name' não pode ser nulo.");
+        }
+
+
+        [Fact]
+        public async Task Shouldnot_CreateGroupUseCase_WithPublicSchoolNull()
+        {
+            var request = new CreateGroupRequest() { Inep = "00000000", Name = "Escola Maria Claudia" };
+
+            ValidationException ex = await Assert.ThrowsAsync<ValidationException>(() => _createGroupUseCase.Execute(request));
+            ex.AssertErrorMessage("'Public School' não pode ser nulo.");
         }
     }
 }

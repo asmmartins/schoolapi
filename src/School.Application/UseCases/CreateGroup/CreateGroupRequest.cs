@@ -4,7 +4,7 @@ namespace School.Application.UseCases.CreateGroup
 {
     public class CreateGroupRequest
     {
-        public string Name { get; set; }
-        public Guid PublicSchoolId { get; set; }
+        public string Inep { get; set; }
+        public string Name { get; set; }        
     }
 }
