@@ -21,6 +21,15 @@ namespace School.Domain.Groups
             return Group;
         }
 
+        public Group Update(PublicSchool publicSchool)
+        {            
+            PublicSchool = publicSchool;
+
+            Validate(this);
+
+            return this;
+        }
+
         private static void Validate(Group Group)
         {
             var validator = new GroupValidator();
