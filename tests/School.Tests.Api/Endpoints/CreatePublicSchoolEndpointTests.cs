@@ -5,6 +5,7 @@ using School.Application.UseCases.CreatePublicSchool;
 using School.Application.UseCases.GetPublicSchool;
 using School.Application.UseCases.Shared.Dtos;
 using School.Domain.Shared.Extensions;
+using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
@@ -50,6 +51,8 @@ namespace School.Tests.Api.Endpoints
             await Should_CreateGroupInSchool_Returns204(inep);
 
             await Should_GetPublicSchool_Returns200(inep);
+
+            await Should_GetGroupsFromPublicSchool_Returns200(inep);            
         }
 
         private async Task Should_CreateGroupInSchool_Returns204(string inep)
@@ -85,6 +88,41 @@ namespace School.Tests.Api.Endpoints
             // Asserts
             response.StatusCode.Should().Be(HttpStatusCode.OK);
             content.Should().NotBeNull();            
+        }
+
+        private async Task Should_GetGroupsFromPublicSchool_Returns200(string inep)
+        {
+            var route = $"public-schools/{inep}/groups";
+
+            // Acts
+            var client = await _testHost.GetClientAsync();
+            var response = await client.GetAsync(route);
+
+            var json = await response.Content.ReadAsStringAsync();
+            var content = response.IsSuccessStatusCode ? JsonConvert.DeserializeObject<IEnumerable<GroupDto>>(json) : null;
+
+            // Asserts
+            response.StatusCode.Should().Be(HttpStatusCode.OK);
+            content.Should().NotBeNull();
+
+            foreach (var c in content)            
+                await Should_GetGroupFromId_Returns200(c.Id);            
+        }
+
+        private async Task Should_GetGroupFromId_Returns200(Guid id)
+        {
+            var route = $"groups/{id}";
+
+            // Acts
+            var client = await _testHost.GetClientAsync();
+            var response = await client.GetAsync(route);
+
+            var json = await response.Content.ReadAsStringAsync();
+            var content = response.IsSuccessStatusCode ? JsonConvert.DeserializeObject<GroupDto>(json) : null;
+
+            // Asserts
+            response.StatusCode.Should().Be(HttpStatusCode.OK);
+            content.Should().NotBeNull();
         }
     }
 }
