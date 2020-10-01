@@ -43,9 +43,5 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\School.Api\School.Api.csproj" />
   </ItemGroup>
-  
-  <ItemGroup>
-    <Folder Include="Api\Controllers\" />
-  </ItemGroup>
 
 </Project>
