@@ -4,7 +4,7 @@ using School.Repository.Shared;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace School.Repository.Sensores
+namespace School.Repository.PublicSchools
 {
     public class PublicSchoolRepository : IRepository<PublicSchool>
     {

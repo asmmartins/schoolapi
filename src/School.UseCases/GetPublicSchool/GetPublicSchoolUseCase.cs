@@ -18,17 +18,17 @@ namespace School.UseCases.GetPublicSchool
         {
             _mapper = mapper;
             _publicSchoolRepository = publicSchoolRepository;
-        }                
+        }
 
         public async Task<GetPublicSchoolResponse> Execute(string inep)
         {
             var publicSchool = await GetPublicSchoolByInep(inep);
-            return _mapper.Map<GetPublicSchoolResponse>(publicSchool);                        
+            return _mapper.Map<GetPublicSchoolResponse>(publicSchool);
         }
 
         private async Task<PublicSchool> GetPublicSchoolByInep(string inep)
         {
-            var publicSchools = await _publicSchoolRepository.GetAll();            
+            var publicSchools = await _publicSchoolRepository.GetAll();
             return publicSchools?.FirstOrDefault(ps => ps.Inep == inep?.Trim());
         }
     }

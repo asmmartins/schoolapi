@@ -32,7 +32,7 @@ namespace School.Api.Controllers
             if (createGroupRequest.Inep != inep)
                 return BadRequest();
 
-            await _createGroupUseCase.Execute(createGroupRequest);            
+            await _createGroupUseCase.Execute(createGroupRequest);
 
             return NoContent();
         }

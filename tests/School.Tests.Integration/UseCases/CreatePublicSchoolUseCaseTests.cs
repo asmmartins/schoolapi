@@ -58,7 +58,7 @@ namespace School.Tests.Integration.UseCases
             publicSchool.Address.State.Should().Be(state);
         }
 
-        [Fact]       
+        [Fact]
         public async Task Shouldnot_CreatePublicSchoolUseCase_WithRequestNull()
         {
             ArgumentNullException ex = await Assert.ThrowsAsync<ArgumentNullException>(() => _createPublicSchoolUseCase.Execute(null));
@@ -69,9 +69,9 @@ namespace School.Tests.Integration.UseCases
         [Fact]
         public async Task Shouldnot_CreatePublicSchoolUseCase_WithAddressNull()
         {
-            var request = new CreatePublicSchoolRequest() { Inep = "59658745",  Name = "Escola Nossa Senhora do Loreto" };
+            var request = new CreatePublicSchoolRequest() { Inep = "59658745", Name = "Escola Nossa Senhora do Loreto" };
 
-            ValidationException ex = await Assert.ThrowsAsync<ValidationException>(() => _createPublicSchoolUseCase.Execute(request));            
+            ValidationException ex = await Assert.ThrowsAsync<ValidationException>(() => _createPublicSchoolUseCase.Execute(request));
             ex.AssertErrorMessage("'Address' não pode ser nulo.");
         }
 

@@ -12,7 +12,7 @@ namespace School.Infra.Ioc
         public AutoMapperProfile()
         {
             CreatePublicSchoolMap();
-            CreateAddressMap();            
+            CreateAddressMap();
             CreateGroupMap();
         }
 
@@ -23,12 +23,12 @@ namespace School.Infra.Ioc
 
         private void CreatePublicSchoolMap()
         {
-            CreateMap<PublicSchool, GetPublicSchoolResponse>();               
+            CreateMap<PublicSchool, GetPublicSchoolResponse>();
         }
 
         private void CreateGroupMap()
         {
             CreateMap<Group, GroupDto>();
         }
-    }   
+    }
 }

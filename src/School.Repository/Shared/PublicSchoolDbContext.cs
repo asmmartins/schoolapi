@@ -12,8 +12,11 @@ namespace School.Repository.Shared
             publicSchools = new List<PublicSchool>();
         }
 
-        public void Save(PublicSchool PublicSchool) =>
+        public void Save(PublicSchool PublicSchool)
+        {
+            publicSchools.Remove(PublicSchool);
             publicSchools.Add(PublicSchool);
+        }
 
         public IEnumerable<PublicSchool> GetAll() => publicSchools;
     }

@@ -12,7 +12,7 @@ namespace School.Domain.Groups
             var Group = new Group()
             {
                 Id = Guid.NewGuid(),
-                Name = name?.Trim(), 
+                Name = name?.Trim(),
                 PublicSchool = publicSchool
             };
 

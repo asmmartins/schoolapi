@@ -9,7 +9,7 @@ namespace School.UseCases.CreatePublicSchool
         {
             AddInepRules();
             AddNameRules();
-            AddAddressRules();            
+            AddAddressRules();
         }
 
         private void AddInepRules()

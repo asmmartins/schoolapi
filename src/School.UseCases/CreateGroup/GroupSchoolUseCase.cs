@@ -34,17 +34,17 @@ namespace School.UseCases.CreateGroup
 
         private static void Validate(CreateGroupRequest createGroupRequest)
         {
-            if (createGroupRequest == null) 
+            if (createGroupRequest == null)
                 throw new ArgumentNullException("CreateGroupRequest");
 
             var validator = new CreateGroupRequestValidator();
-            validator.ValidateAndThrow(createGroupRequest);            
+            validator.ValidateAndThrow(createGroupRequest);
         }
 
         private async Task<PublicSchool> GetPublicSchoolByInep(string inep)
         {
             var publicSchools = await _publicSchoolRepository.GetAll();
-            return publicSchools.FirstOrDefault(ps => ps.Inep == inep?.Trim());
+            return publicSchools?.FirstOrDefault(ps => ps.Inep == inep?.Trim());
         }
     }
 }

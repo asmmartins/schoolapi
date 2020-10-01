@@ -12,8 +12,11 @@ namespace School.Repository.Shared
             groups = new List<Group>();
         }
 
-        public void Save(Group Group) =>
+        public void Save(Group Group)
+        {
+            groups.Remove(Group);
             groups.Add(Group);
+        }
 
         public IEnumerable<Group> GetAll() => groups;
     }

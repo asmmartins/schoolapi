@@ -20,17 +20,17 @@ namespace School.UseCases.GetGroup
         {
             _mapper = mapper;
             _groupRepository = GroupRepository;
-        }                
+        }
 
         public async Task<GroupDto> Execute(Guid id)
         {
             var group = await GetGroupById(id);
-            return _mapper.Map<GroupDto>(group);                        
+            return _mapper.Map<GroupDto>(group);
         }
 
         private async Task<Group> GetGroupById(Guid id)
         {
-            var groups = await _groupRepository.GetAll();            
+            var groups = await _groupRepository.GetAll();
             return groups?.FirstOrDefault(ps => ps.Id == id);
         }
     }

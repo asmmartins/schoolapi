@@ -2,8 +2,8 @@
 using FluentValidation;
 using School.Tests.Unit.Shared;
 using Xunit;
-using VO = School.Domain.Shared.ValueObjects;
 using PublicSchoolDomain = School.Domain.PublicSchools;
+using VO = School.Domain.Shared.ValueObjects;
 
 namespace School.Tests.Unit.Domain.PublicSchools
 {
@@ -22,15 +22,15 @@ namespace School.Tests.Unit.Domain.PublicSchools
 
         [Theory]
         [InlineData("13082175", null, "'Name' não pode ser nulo.")]
-        [InlineData("13082175", "", "'Name' deve ser informado.")]        
+        [InlineData("13082175", "", "'Name' deve ser informado.")]
         public void Shouldnot_CreatePublicSchool_WithNameInvalid(string inep, string name, string errorMessage)
         {
             ValidationException ex = Assert.Throws<ValidationException>(() => PublicSchoolDomain.PublicSchool.Create(inep, name, null));
             ex.AssertErrorMessage(errorMessage);
-        }        
+        }
 
         [Theory]
-        [InlineData("13082175", "Escola Municipal Piox", "20230011", "Rua Riachuelo, 221", "Apt 915", "Centro", "Rio de Janeiro", VO.Addresses.State.RJ)]        
+        [InlineData("13082175", "Escola Municipal Piox", "20230011", "Rua Riachuelo, 221", "Apt 915", "Centro", "Rio de Janeiro", VO.Addresses.State.RJ)]
         public void Should_CreatePublicSchool(string inep, string name, string zipCode, string baseAddress, string complementAddress, string neighborhood, string city, VO.Addresses.State state)
         {
             var address = VO.Addresses.Address.Create(zipCode, baseAddress, complementAddress, neighborhood, city, state);

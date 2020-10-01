@@ -20,17 +20,17 @@ namespace School.UseCases.GetGroups
         {
             _mapper = mapper;
             _groupRepository = GroupRepository;
-        }                
+        }
 
         public async Task<IEnumerable<GroupDto>> Execute(string inep)
         {
             var groups = await GetGroupByInep(inep);
-            return _mapper.Map<IEnumerable<GroupDto>>(groups);                        
+            return _mapper.Map<IEnumerable<GroupDto>>(groups);
         }
 
         private async Task<IEnumerable<Group>> GetGroupByInep(string inep)
         {
-            var groups = await _groupRepository.GetAll();            
+            var groups = await _groupRepository.GetAll();
             return groups?.Where(ps => ps.PublicSchool.Inep == inep?.Trim());
         }
     }

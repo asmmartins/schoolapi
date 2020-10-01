@@ -8,7 +8,7 @@ namespace School.UseCases.CreateGroup
         public CreateGroupRequestValidator()
         {
             AddInepRules();
-            AddNameRules();            
+            AddNameRules();
         }
 
         private void AddInepRules()
@@ -21,6 +21,6 @@ namespace School.UseCases.CreateGroup
         {
             RuleFor(request => request.Name).NotNull();
             RuleFor(request => request.Name).NotEmpty();
-        }        
+        }
     }
 }

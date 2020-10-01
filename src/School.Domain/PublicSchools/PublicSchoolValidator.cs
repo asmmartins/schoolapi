@@ -15,7 +15,7 @@ namespace School.Domain.PublicSchools
         private void AddIdRules()
         {
             RuleFor(publicSchool => publicSchool.Id).NotNull();
-            RuleFor(publicSchool => publicSchool.Id).NotEmpty();            
+            RuleFor(publicSchool => publicSchool.Id).NotEmpty();
         }
 
         private void AddInepRules()
@@ -23,7 +23,7 @@ namespace School.Domain.PublicSchools
             RuleFor(publicSchool => publicSchool.Inep).NotNull();
             RuleFor(publicSchool => publicSchool.Inep).NotEmpty();
             RuleFor(publicSchool => publicSchool.Inep).Matches("^[0-9]+$");
-            RuleFor(publicSchool => publicSchool.Inep).Length(8, 8);            
+            RuleFor(publicSchool => publicSchool.Inep).Length(8, 8);
         }
 
         private void AddNameRules()

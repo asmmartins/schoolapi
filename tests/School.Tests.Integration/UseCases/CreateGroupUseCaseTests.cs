@@ -72,7 +72,7 @@ namespace School.Tests.Integration.UseCases
             }
         }
 
-        [Fact]       
+        [Fact]
         public async Task Shouldnot_CreateGroupUseCase_WithRequestNull()
         {
             ArgumentNullException ex = await Assert.ThrowsAsync<ArgumentNullException>(() => _createGroupUseCase.Execute(null));
@@ -85,7 +85,7 @@ namespace School.Tests.Integration.UseCases
         {
             var request = new CreateGroupRequest() { Inep = null, Name = "Escola Nossa Senhora do Loreto" };
 
-            ValidationException ex = await Assert.ThrowsAsync<ValidationException>(() => _createGroupUseCase.Execute(request));            
+            ValidationException ex = await Assert.ThrowsAsync<ValidationException>(() => _createGroupUseCase.Execute(request));
             ex.AssertErrorMessage("'Inep' não pode ser nulo.");
         }
 

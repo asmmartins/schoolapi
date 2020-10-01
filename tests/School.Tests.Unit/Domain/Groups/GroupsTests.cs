@@ -1,10 +1,10 @@
-﻿using FluentValidation;
-using Xunit;
-using VO = School.Domain.Shared.ValueObjects;
-using PublicSchoolDomain = School.Domain.PublicSchools;
-using GroupDomain = School.Domain.Groups;
+﻿using FluentAssertions;
+using FluentValidation;
 using School.Tests.Unit.Shared;
-using FluentAssertions;
+using Xunit;
+using GroupDomain = School.Domain.Groups;
+using PublicSchoolDomain = School.Domain.PublicSchools;
+using VO = School.Domain.Shared.ValueObjects;
 
 namespace School.Tests.Unit.Domain.Groups
 {

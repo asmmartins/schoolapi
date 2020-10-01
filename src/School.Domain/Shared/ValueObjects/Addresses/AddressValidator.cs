@@ -31,7 +31,7 @@ namespace School.Domain.Shared.ValueObjects.Addresses
         }
 
         private void AddComplementAddressRules()
-        {                     
+        {
             RuleFor(address => address.ComplementAddress).MaximumLength(50);
         }
 

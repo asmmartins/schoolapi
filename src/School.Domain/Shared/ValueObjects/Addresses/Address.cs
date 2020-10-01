@@ -9,7 +9,7 @@ namespace School.Domain.Shared.ValueObjects.Addresses
         public string ComplementAddress { get; private set; }
         public string Neighborhood { get; private set; }
         public string City { get; private set; }
-        public State State { get; private set;  }
+        public State State { get; private set; }
 
         protected override IEnumerable<object> GetEqualsProperties()
         {

@@ -1,11 +1,10 @@
 ﻿using School.Domain.Groups;
-using School.Domain.Sensores;
 using School.Domain.Shared;
 using School.Repository.Shared;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace School.Repository.Sensores
+namespace School.Repository.Groups
 {
     public class GroupRepository : IRepository<Group>
     {

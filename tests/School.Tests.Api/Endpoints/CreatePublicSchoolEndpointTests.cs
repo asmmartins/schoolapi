@@ -52,7 +52,7 @@ namespace School.Tests.Api.Endpoints
 
             await Should_GetPublicSchool_Returns200(inep);
 
-            await Should_GetGroupsFromPublicSchool_Returns200(inep);            
+            await Should_GetGroupsFromPublicSchool_Returns200(inep);
         }
 
         private async Task Should_CreateGroupInSchool_Returns204(string inep)
@@ -60,7 +60,7 @@ namespace School.Tests.Api.Endpoints
             CreateGroupRequest createGroupRequest = new CreateGroupRequest()
             {
                 Inep = inep,
-                Name = "Escola Novo Amanhã",              
+                Name = "Escola Novo Amanhã",
             };
 
             var route = $"public-schools/{inep}/groups";
@@ -87,7 +87,7 @@ namespace School.Tests.Api.Endpoints
 
             // Asserts
             response.StatusCode.Should().Be(HttpStatusCode.OK);
-            content.Should().NotBeNull();            
+            content.Should().NotBeNull();
         }
 
         private async Task Should_GetGroupsFromPublicSchool_Returns200(string inep)
@@ -105,8 +105,8 @@ namespace School.Tests.Api.Endpoints
             response.StatusCode.Should().Be(HttpStatusCode.OK);
             content.Should().NotBeNull();
 
-            foreach (var c in content)            
-                await Should_GetGroupFromId_Returns200(c.Id);            
+            foreach (var c in content)
+                await Should_GetGroupFromId_Returns200(c.Id);
         }
 
         private async Task Should_GetGroupFromId_Returns200(Guid id)

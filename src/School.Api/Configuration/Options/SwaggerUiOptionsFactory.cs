@@ -12,7 +12,7 @@ namespace School.Api.Configuration.Options
             return options =>
             {
                 options.DocExpansion(DocExpansion.None);
-                options.SwaggerEndpoint(config["swagger:path"], "Api de Sensores");
+                options.SwaggerEndpoint(config["swagger:path"], "v1");
             };
         }
     }

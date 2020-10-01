@@ -30,7 +30,7 @@ namespace School.Tests.Unit.Domain.Shared.ValueObjects.Address
         }
 
         [Theory]
-        [InlineData("Calculate the length of your string of text or number", "'Complement Address' deve ser menor ou igual a 50 caracteres. Você digitou 53 caracteres.")]        
+        [InlineData("Calculate the length of your string of text or number", "'Complement Address' deve ser menor ou igual a 50 caracteres. Você digitou 53 caracteres.")]
         public void Shouldnot_CreateAddress_WithComplementAddressInvalid(string complementAddress, string errorMessage)
         {
             ValidationException ex = Assert.Throws<ValidationException>(() => VO.Addresses.Address.Create("20230011", "Rua Riachuelo, 221", complementAddress, "", "", VO.Addresses.State.CE));
@@ -45,7 +45,7 @@ namespace School.Tests.Unit.Domain.Shared.ValueObjects.Address
         {
             ValidationException ex = Assert.Throws<ValidationException>(() => VO.Addresses.Address.Create("20230011", "Ria Riachuelo, 221", "Apt 915", neighborhood, "", VO.Addresses.State.RS));
             ex.AssertErrorMessage(errorMessage);
-        }        
+        }
 
         [Theory]
         [InlineData(null, "'City' não pode ser nulo.")]
@@ -55,11 +55,11 @@ namespace School.Tests.Unit.Domain.Shared.ValueObjects.Address
         {
             ValidationException ex = Assert.Throws<ValidationException>(() => VO.Addresses.Address.Create("20230011", "Ria Riachuelo, 221", "Apt 915", "Centro", city, VO.Addresses.State.SP));
             ex.AssertErrorMessage(errorMessage);
-        }    
+        }
 
         [Theory]
         [InlineData("20230011", "Rua Riachuelo, 221", "Apt 915", "Centro", "Rio de Janeiro", VO.Addresses.State.RJ)]
-        [InlineData("22763040", "Ria Inácio do Amaral, 537", "Casa 03", "Freguesia / JPA", "Rio de Janeiro", VO.Addresses.State.RJ)]        
+        [InlineData("22763040", "Ria Inácio do Amaral, 537", "Casa 03", "Freguesia / JPA", "Rio de Janeiro", VO.Addresses.State.RJ)]
         public void Should_CreateAddress(string zipCode, string baseAddress, string complementAddress, string neighborhood, string city, VO.Addresses.State state)
         {
             var address = VO.Addresses.Address.Create(zipCode, baseAddress, complementAddress, neighborhood, city, state);
@@ -67,10 +67,10 @@ namespace School.Tests.Unit.Domain.Shared.ValueObjects.Address
             address.Should().NotBeNull();
             address.ZipCode.Should().Be(zipCode);
             address.BaseAddress.Should().Be(baseAddress);
-            address.ComplementAddress.Should().Be(complementAddress);            
+            address.ComplementAddress.Should().Be(complementAddress);
             address.Neighborhood.Should().Be(neighborhood);
             address.City.Should().Be(city);
             address.State.Should().Be(state);
-        }        
+        }
     }
 }

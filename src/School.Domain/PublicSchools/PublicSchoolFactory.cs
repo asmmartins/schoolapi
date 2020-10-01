@@ -22,6 +22,16 @@ namespace School.Domain.PublicSchools
             return publicSchool;
         }
 
+        public PublicSchool Update(string name, Address address)
+        {
+            Name = name?.Trim();
+            Address = address;         
+
+            Validate(this);
+
+            return this;
+        }
+
         private static void Validate(PublicSchool publicSchool)
         {
             var validator = new PublicSchoolValidator();

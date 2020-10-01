@@ -28,7 +28,7 @@ namespace School.Domain.Groups
         private void AddPublicSchoolRules()
         {
             RuleFor(group => group.PublicSchool).NotNull();
-            RuleFor(group => group.PublicSchool).NotEmpty();            
+            RuleFor(group => group.PublicSchool).NotEmpty();
         }
     }
 }
