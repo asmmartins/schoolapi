@@ -1,6 +1,6 @@
 #### Arquitetura
 
-A arquitetura proposta se baseia no conceito CQRS. Fazendo que seja separado o que é uma "abstração" de uma "implementação".
+A arquitetura proposta se baseia no conceito hexagonal. Fazendo que seja separado o que é uma "abstração" de uma "implementação".
 
 1. **Abstrações** - É o contrato do que será implementado, sendo modelado através de interfaces e objetos de transferência.
 2. **Implementações** - Desenvolvimento propriedade dito de um contrato previamente estabelecido.
