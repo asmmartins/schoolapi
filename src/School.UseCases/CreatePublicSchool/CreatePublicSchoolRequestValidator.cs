@@ -7,8 +7,15 @@ namespace School.UseCases.CreatePublicSchool
     {
         public CreatePublicSchoolRequestValidator()
         {
+            AddInepRules();
             AddNameRules();
-            AddAddressRules();
+            AddAddressRules();            
+        }
+
+        private void AddInepRules()
+        {
+            RuleFor(request => request.Inep).NotNull();
+            RuleFor(request => request.Inep).NotEmpty();
         }
 
         private void AddNameRules()

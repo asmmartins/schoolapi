@@ -23,7 +23,7 @@ namespace School.UseCases.CreatePublicSchool
             Validate(createPublicSchoolRequest);
 
             var address = Address.Create(createPublicSchoolRequest.Address.ZipCode, createPublicSchoolRequest.Address.BaseAddress, createPublicSchoolRequest.Address?.ComplementAddress, createPublicSchoolRequest.Address.Neighborhood, createPublicSchoolRequest.Address.City, createPublicSchoolRequest.Address.State);
-            var publicSchool = PublicSchool.Create(createPublicSchoolRequest.Name, address);
+            var publicSchool = PublicSchool.Create(createPublicSchoolRequest.Inep, createPublicSchoolRequest.Name, address);
 
             await _publicSchoolRepository.Save(publicSchool);
         }

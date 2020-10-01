@@ -7,11 +7,12 @@ namespace School.Domain.PublicSchools
 {
     public partial class PublicSchool : IAggregateRoot
     {
-        public static PublicSchool Create(string name, Address address)
+        public static PublicSchool Create(string inep, string name, Address address)
         {
             var publicSchool = new PublicSchool()
             {
                 Id = Guid.NewGuid(),
+                Inep = inep?.Trim(),
                 Name = name?.Trim(),
                 Address = address
             };

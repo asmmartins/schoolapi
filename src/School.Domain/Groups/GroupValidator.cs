@@ -8,6 +8,7 @@ namespace School.Domain.Groups
         {
             AddIdRules();
             AddNameRules();
+            AddPublicSchoolRules();
         }
 
         private void AddIdRules()
@@ -22,6 +23,12 @@ namespace School.Domain.Groups
             RuleFor(group => group.Name).NotEmpty();
             RuleFor(group => group.Name).MinimumLength(1);
             RuleFor(group => group.Name).MaximumLength(100);
+        }
+
+        private void AddPublicSchoolRules()
+        {
+            RuleFor(group => group.PublicSchool).NotNull();
+            RuleFor(group => group.PublicSchool).NotEmpty();            
         }
     }
 }

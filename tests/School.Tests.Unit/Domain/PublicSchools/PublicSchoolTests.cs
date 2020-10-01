@@ -10,20 +10,31 @@ namespace School.Tests.Unit.Domain.PublicSchools
     public class PublicSchoolTests
     {
         [Theory]
-        [InlineData(null, "'Name' não pode ser nulo.")]
-        [InlineData("", "'Name' deve ser informado.")]        
-        public void Shouldnot_CreatePublicSchool_WithNameInvalid(string name, string errorMessage)
+        [InlineData(null, "'Inep' não pode ser nulo.")]
+        [InlineData("", "'Inep' deve ser informado.")]
+        [InlineData("202300111", "'Inep' deve ter entre 8 e 8 caracteres. Você digitou 9 caracteres.")]
+        [InlineData("0A859685", "'Inep' não está no formato correto.")]
+        public void Shouldnot_CreatePublicSchool_WithInepInvalid(string inep, string errorMessage)
         {
-            ValidationException ex = Assert.Throws<ValidationException>(() => PublicSchoolDomain.PublicSchool.Create(name, null));
+            ValidationException ex = Assert.Throws<ValidationException>(() => PublicSchoolDomain.PublicSchool.Create(inep, null, null));
             ex.AssertErrorMessage(errorMessage);
         }
 
         [Theory]
-        [InlineData("Escola Municipal Piox", "20230011", "Rua Riachuelo, 221", "Apt 915", "Centro", "Rio de Janeiro", VO.Addresses.State.RJ)]        
-        public void Should_CreatePublicSchool(string name, string zipCode, string baseAddress, string complementAddress, string neighborhood, string city, VO.Addresses.State state)
+        [InlineData("13082175", null, "'Name' não pode ser nulo.")]
+        [InlineData("13082175", "", "'Name' deve ser informado.")]        
+        public void Shouldnot_CreatePublicSchool_WithNameInvalid(string inep, string name, string errorMessage)
+        {
+            ValidationException ex = Assert.Throws<ValidationException>(() => PublicSchoolDomain.PublicSchool.Create(inep, name, null));
+            ex.AssertErrorMessage(errorMessage);
+        }        
+
+        [Theory]
+        [InlineData("13082175", "Escola Municipal Piox", "20230011", "Rua Riachuelo, 221", "Apt 915", "Centro", "Rio de Janeiro", VO.Addresses.State.RJ)]        
+        public void Should_CreatePublicSchool(string inep, string name, string zipCode, string baseAddress, string complementAddress, string neighborhood, string city, VO.Addresses.State state)
         {
             var address = VO.Addresses.Address.Create(zipCode, baseAddress, complementAddress, neighborhood, city, state);
-            var publicSchool = PublicSchoolDomain.PublicSchool.Create(name, address);
+            var publicSchool = PublicSchoolDomain.PublicSchool.Create(inep, name, address);
 
             publicSchool.Should().NotBeNull();
             publicSchool.Name.Should().Be(name);

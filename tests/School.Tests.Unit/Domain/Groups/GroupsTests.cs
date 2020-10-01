@@ -20,11 +20,11 @@ namespace School.Tests.Unit.Domain.Groups
         }
 
         [Theory]
-        [InlineData("Turma I", "Escola Municipal Piox", "20230011", "Rua Riachuelo, 221", "Apt 915", "Centro", "Rio de Janeiro", VO.Addresses.State.RJ)]
-        public void Should_CreateGroup(string name, string namePublicSchool, string zipCode, string baseAddress, string complementAddress, string neighborhood, string city, VO.Addresses.State state)
+        [InlineData("Turma I", "85988575", "Escola Municipal Piox", "20230011", "Rua Riachuelo, 221", "Apt 915", "Centro", "Rio de Janeiro", VO.Addresses.State.RJ)]
+        public void Should_CreateGroup(string name, string inep, string namePublicSchool, string zipCode, string baseAddress, string complementAddress, string neighborhood, string city, VO.Addresses.State state)
         {
             var address = VO.Addresses.Address.Create(zipCode, baseAddress, complementAddress, neighborhood, city, state);
-            var publicSchool = PublicSchoolDomain.PublicSchool.Create(namePublicSchool, address);
+            var publicSchool = PublicSchoolDomain.PublicSchool.Create(inep, namePublicSchool, address);
             var group = GroupDomain.Group.Create(name, publicSchool);
 
             group.Should().NotBeNull();

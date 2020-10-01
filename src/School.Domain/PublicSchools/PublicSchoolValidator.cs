@@ -7,6 +7,7 @@ namespace School.Domain.PublicSchools
         public PublicSchoolValidator()
         {
             AddIdRules();
+            AddInepRules();
             AddNameRules();
             AdAddressRules();
         }
@@ -15,6 +16,14 @@ namespace School.Domain.PublicSchools
         {
             RuleFor(publicSchool => publicSchool.Id).NotNull();
             RuleFor(publicSchool => publicSchool.Id).NotEmpty();            
+        }
+
+        private void AddInepRules()
+        {
+            RuleFor(publicSchool => publicSchool.Inep).NotNull();
+            RuleFor(publicSchool => publicSchool.Inep).NotEmpty();
+            RuleFor(publicSchool => publicSchool.Inep).Matches("^[0-9]+$");
+            RuleFor(publicSchool => publicSchool.Inep).Length(8, 8);            
         }
 
         private void AddNameRules()
