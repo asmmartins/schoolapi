@@ -2,6 +2,7 @@
 using FluentValidation;
 using School.Application.UseCases.CreatePublicSchool;
 using School.Application.UseCases.GetPublicSchool;
+using School.Application.UseCases.GetPublicSchools;
 using School.Application.UseCases.Shared.Dtos;
 using School.Tests.Integration.Shared;
 using System;
@@ -14,13 +15,16 @@ namespace School.Tests.Integration.UseCases
     {
         private readonly ICreatePublicSchoolUseCase _createPublicSchoolUseCase;
         private readonly IGetPublicSchoolUseCase _getPublicSchoolUseCase;
+        private readonly IGetPublicSchoolsUseCase _getPublicSchoolsUseCase;
 
         public CreatePublicSchoolUseCaseTests(
             ICreatePublicSchoolUseCase createPublicSchoolUseCase,
-            IGetPublicSchoolUseCase getPublicSchoolUseCase)
+            IGetPublicSchoolUseCase getPublicSchoolUseCase,
+            IGetPublicSchoolsUseCase getPublicSchoolsUseCase)
         {
             _createPublicSchoolUseCase = createPublicSchoolUseCase;
             _getPublicSchoolUseCase = getPublicSchoolUseCase;
+            _getPublicSchoolsUseCase = getPublicSchoolsUseCase;
         }
 
         [Theory]
@@ -56,6 +60,10 @@ namespace School.Tests.Integration.UseCases
             publicSchool.Address.Neighborhood.Should().Be(neighborhood);
             publicSchool.Address.City.Should().Be(city);
             publicSchool.Address.State.Should().Be(state);
+
+            var publicSchools = await _getPublicSchoolsUseCase.Execute();
+            publicSchools.Should().NotBeEmpty();
+            publicSchools.Should().OnlyHaveUniqueItems();
         }
 
         [Fact]

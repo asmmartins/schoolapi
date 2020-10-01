@@ -21,7 +21,7 @@ namespace School.UseCases.CreatePublicSchool
         public async Task Execute(CreatePublicSchoolRequest createPublicSchoolRequest)
         {
             Validate(createPublicSchoolRequest);
-            
+
             var address = Address.Create(createPublicSchoolRequest.Address.ZipCode, createPublicSchoolRequest.Address.BaseAddress, createPublicSchoolRequest.Address?.ComplementAddress, createPublicSchoolRequest.Address.Neighborhood, createPublicSchoolRequest.Address.City, createPublicSchoolRequest.Address.State);
 
             var existentPublicSchool = await GetPublicSchoolByInep(createPublicSchoolRequest.Inep);
@@ -50,6 +50,6 @@ namespace School.UseCases.CreatePublicSchool
         {
             var publicSchools = await _publicSchoolRepository.GetAll();
             return publicSchools?.FirstOrDefault(ps => ps.Inep == inep?.Trim());
-        }        
+        }
     }
 }

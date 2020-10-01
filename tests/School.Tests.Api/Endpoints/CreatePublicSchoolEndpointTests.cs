@@ -48,6 +48,8 @@ namespace School.Tests.Api.Endpoints
             // Asserts
             response.StatusCode.Should().Be(HttpStatusCode.NoContent);
 
+            await Should_GetPublicsSchool_Returns200();
+
             await Should_CreateGroupInSchool_Returns204(inep);
 
             await Should_GetPublicSchool_Returns200(inep);
@@ -72,6 +74,23 @@ namespace School.Tests.Api.Endpoints
 
             // Asserts
             response.StatusCode.Should().Be(HttpStatusCode.NoContent);
+        }
+
+        private async Task Should_GetPublicsSchool_Returns200()
+        {
+            var route = $"public-schools";
+
+            // Acts
+            var client = await _testHost.GetClientAsync();
+            var response = await client.GetAsync(route);
+
+            var json = await response.Content.ReadAsStringAsync();
+            var content = response.IsSuccessStatusCode ? JsonConvert.DeserializeObject<IEnumerable<PublicSchoolDto>>(json) : null;
+
+            // Asserts
+            response.StatusCode.Should().Be(HttpStatusCode.OK);
+            content.Should().NotBeNull();
+            content.Should().OnlyHaveUniqueItems();
         }
 
         private async Task Should_GetPublicSchool_Returns200(string inep)

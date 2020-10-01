@@ -24,6 +24,8 @@ namespace School.Infra.Ioc
         private void CreatePublicSchoolMap()
         {
             CreateMap<PublicSchool, GetPublicSchoolResponse>();
+
+            CreateMap<PublicSchool, PublicSchoolDto>();                
         }
 
         private void CreateGroupMap()

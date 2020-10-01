@@ -25,7 +25,7 @@ namespace School.Domain.PublicSchools
         public PublicSchool Update(string name, Address address)
         {
             Name = name?.Trim();
-            Address = address;         
+            Address = address;
 
             Validate(this);
 
