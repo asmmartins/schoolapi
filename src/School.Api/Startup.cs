@@ -27,7 +27,7 @@ namespace School.Api
             });
             services.AddMyControllers();
             services.AddMySwaggerGen();
-            services.AddAutoMapper(typeof(Startup));
+            services.AddAutoMapper(typeof(AutoMapperProfile));
             services.AddDependecyInjection();
         }
 

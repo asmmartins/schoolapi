@@ -1,8 +1,11 @@
 ﻿using FluentAssertions;
+using Newtonsoft.Json;
 using School.Application.UseCases.CreateGroup;
 using School.Application.UseCases.CreatePublicSchool;
+using School.Application.UseCases.GetPublicSchool;
 using School.Application.UseCases.Shared.Dtos;
 using School.Domain.Shared.Extensions;
+using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
 using Xunit;
@@ -45,6 +48,8 @@ namespace School.Tests.Api.Endpoints
             response.StatusCode.Should().Be(HttpStatusCode.NoContent);
 
             await Should_CreateGroupInSchool_Returns204(inep);
+
+            await Should_GetPublicSchool_Returns200(inep);
         }
 
         private async Task Should_CreateGroupInSchool_Returns204(string inep)
@@ -64,6 +69,22 @@ namespace School.Tests.Api.Endpoints
 
             // Asserts
             response.StatusCode.Should().Be(HttpStatusCode.NoContent);
+        }
+
+        private async Task Should_GetPublicSchool_Returns200(string inep)
+        {
+            var route = $"public-schools/{inep}";
+
+            // Acts
+            var client = await _testHost.GetClientAsync();
+            var response = await client.GetAsync(route);
+
+            var json = await response.Content.ReadAsStringAsync();
+            var content = response.IsSuccessStatusCode ? JsonConvert.DeserializeObject<GetPublicSchoolResponse>(json) : null;
+
+            // Asserts
+            response.StatusCode.Should().Be(HttpStatusCode.OK);
+            content.Should().NotBeNull();            
         }
     }
 }

@@ -11,8 +11,8 @@ namespace School.Infra.Ioc
     {
         public AutoMapperProfile()
         {
-            CreateAddressMap();
             CreatePublicSchoolMap();
+            CreateAddressMap();            
             CreateGroupMap();
         }
 
@@ -23,7 +23,7 @@ namespace School.Infra.Ioc
 
         private void CreatePublicSchoolMap()
         {
-            CreateMap<PublicSchool, GetPublicSchoolResponse>();
+            CreateMap<PublicSchool, GetPublicSchoolResponse>();               
         }
 
         private void CreateGroupMap()
